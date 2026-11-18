@@ -1,13 +1,51 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>capsula-del-tiempo</title>
+    <title>Cápsula del Tiempo</title>
   </head>
   <body>
-    <div id="app"></div>
+    <header>
+      <h1>Cápsula del Tiempo</h1>
+      <p>Escribe un mensaje para tu yo del futuro. Solo podrás leerlo cuando llegue la fecha.</p>
+    </header>
+
+    <main>
+      <form id="formulario">
+        <input type="hidden" id="id" />
+        <input type="text" id="titulo" placeholder="Título" required />
+        <textarea id="mensaje" placeholder="Tu mensaje para el futuro..." required></textarea>
+        <select id="emocion" required>
+          <option value="">¿Cómo te sientes?</option>
+          <option value="feliz">Feliz</option>
+          <option value="nostalgico">Nostálgico</option>
+          <option value="triste">Triste</option>
+          <option value="otro">Otro</option>
+        </select>
+        <input type="text" id="otraEmocion" placeholder="Escribe como tu emoción" hidden />
+        <label>Abrir el: <input type="date" id="fecha" required /></label>
+        <div class="botones">
+          <button type="submit" id="btnGuardar">Guardar cápsula</button>
+          <button type="button" id="btnCancelar" hidden>Cancelar</button>
+        </div>
+      </form>
+
+      <div class="filtro">
+        <label>Filtrar por emoción:
+          <select id="filtro">
+            <option value="">Todas</option>
+            <option value="feliz">Feliz</option>
+            <option value="nostalgico">Nostálgico</option>
+            <option value="triste">Triste</option>
+            <option value="otro">Otras</option>
+          </select>
+        </label>
+      </div>
+
+      <section id="lista"></section>
+    </main>
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
