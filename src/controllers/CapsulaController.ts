@@ -23,6 +23,10 @@ export class CapsulaController {
       const idEditar = boton.dataset.editar
       const idEliminar = boton.dataset.eliminar
 
+      if (boton.dataset.sello) {
+        this.view.abrirSobre(boton)
+      }
+
       if (idEditar) {
         const capsula = this.model.buscarPorId(Number(idEditar))
         if (capsula) this.view.llenarFormulario(capsula)

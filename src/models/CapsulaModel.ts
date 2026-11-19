@@ -16,18 +16,25 @@ export class CapsulaModel {
     this.db = db
   }
 
+  // Fecha de hoy en hora local (toISOString usa hora UTC y en la noche da el día siguiente)
+  private hoy(): string {
+    const d = new Date()
+    const mes = String(d.getMonth() + 1).padStart(2, '0')
+    const dia = String(d.getDate()).padStart(2, '0')
+    return `${d.getFullYear()}-${mes}-${dia}`
+  }
+
   crear(titulo: string, mensaje: string, emocion: string, fechaApertura: string): void {
-    const hoy = new Date().toISOString().slice(0, 10)
     this.db.ejecutar(
       'INSERT INTO capsulas (titulo, mensaje, emocion, fecha_creacion, fecha_apertura) VALUES (?, ?, ?, ?, ?)',
-      [titulo, mensaje, emocion, hoy, fechaApertura]
+      [titulo, mensaje, emocion, this.hoy(), fechaApertura]
     )
   }
 
   listar(emocion = ''): Capsula[] {
     if (emocion === 'otro') {
       return this.db.consultar(
-        "SELECT * FROM capsulas WHERE emocion NOT IN ('feliz', 'nostalgica', 'triste') ORDER BY fecha_apertura"
+        "SELECT * FROM capsulas WHERE emocion NOT IN ('feliz', 'nostalgico', 'triste') ORDER BY fecha_apertura"
       ) as Capsula[]
     }
     if (emocion) {
@@ -56,7 +63,6 @@ export class CapsulaModel {
   }
 
   estaAbierta(capsula: Capsula): boolean {
-    const hoy = new Date().toISOString().slice(0, 10)
-    return capsula.fecha_apertura <= hoy
+    return capsula.fecha_apertura <= this.hoy()
   }
 }

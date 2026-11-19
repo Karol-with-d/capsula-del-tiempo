@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 90 280">
+<path d="M45 270 Q40 180 50 110 T42 10" stroke="#9e8362" stroke-linecap="round" stroke-width="1.2"></path>
+<path d="M48 200 Q65 170 70 145" stroke="#9e8362" stroke-linecap="round" stroke-width="0.8"></path>
+<path d="M46 160 Q25 130 20 100" stroke="#9e8362" stroke-linecap="round" stroke-width="0.8"></path>
+<path d="M49 125 Q70 105 78 85" stroke="#9e8362" stroke-linecap="round" stroke-width="0.75"></path>
+<path d="M43 80 Q22 65 15 45" stroke="#9e8362" stroke-linecap="round" stroke-width="0.75"></path>
+<!-- Delicate blossoms (dots) -->
+<circle cx="70" cy="144" fill="#9e8362" r="2.2"></circle>
+<circle cx="76" cy="138" fill="#9e8362" r="1.6"></circle>
+<circle cx="20" cy="99" fill="#9e8362" r="2"></circle>
+<circle cx="15" cy="93" fill="#9e8362" r="1.5"></circle>
+<circle cx="78" cy="84" fill="#9e8362" r="2.2"></circle>
+<circle cx="83" cy="78" fill="#9e8362" r="1.6"></circle>
+<circle cx="15" cy="44" fill="#9e8362" r="2"></circle>
+<circle cx="10" cy="40" fill="#9e8362" r="1.5"></circle>
+<circle cx="42" cy="9" fill="#9e8362" r="2"></circle>
+<circle cx="46" cy="4" fill="#9e8362" r="1.6"></circle>
+</svg>

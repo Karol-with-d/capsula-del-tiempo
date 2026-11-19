@@ -15,7 +15,11 @@ export class CapsulaView {
 
   mostrar(capsulas: Capsula[], estaAbierta: (c: Capsula) => boolean): void {
     if (capsulas.length === 0) {
-      this.lista.innerHTML = '<p class="vacio">Todavía no hay cápsulas. Crea la primera.</p>'
+      this.lista.innerHTML = `
+        <div class="vacio">
+          <div class="sello-vacio"></div>
+          <p>Todavía no hay cápsulas. Escribe la primera carta.</p>
+        </div>`
       return
     }
 
@@ -23,15 +27,32 @@ export class CapsulaView {
       const abierta = estaAbierta(c)
       return `
         <article class="tarjeta ${abierta ? 'abierta' : 'cerrada'}">
-          <h3>${c.titulo} ${abierta ? '(abierta)' : '(cerrada)'}</h3>
-          <p class="mensaje">${abierta ? c.mensaje : 'Este mensaje se abrirá el ' + c.fecha_apertura}</p>
+          <div class="sobre">
+            <div class="solapa"></div>
+            <button type="button" class="sello" data-sello="${c.id}" title="${abierta ? 'Romper el sello' : 'Todavía no'}">C</button>
+            <h3>${c.titulo}</h3>
+            <p class="nota">${abierta ? 'Toca el sello para abrir' : 'Este mensaje se abrirá el ' + c.fecha_apertura}</p>
+          </div>
+          ${abierta ? `<div class="carta"><p class="mensaje">${c.mensaje}</p></div>` : ''}
           <p class="info">Emoción: ${c.emocion} · Creada: ${c.fecha_creacion}</p>
           <div class="acciones">
-            <button data-editar="${c.id}">Editar</button>
-            <button data-eliminar="${c.id}" class="peligro">Eliminar</button>
+            <button type="button" data-editar="${c.id}">Editar</button>
+            <button type="button" data-eliminar="${c.id}" class="peligro">Eliminar</button>
           </div>
         </article>`
     }).join('')
+  }
+
+  abrirSobre(sello: HTMLElement): void {
+    const tarjeta = sello.closest('.tarjeta') as HTMLElement
+    if (tarjeta.classList.contains('cerrada')) {
+      // todavía no llega la fecha: el sobre solo tiembla
+      tarjeta.classList.remove('temblar')
+      void tarjeta.offsetWidth
+      tarjeta.classList.add('temblar')
+      return
+    }
+    tarjeta.classList.add('leida')
   }
 
   emocionElegida(): string {
@@ -50,7 +71,7 @@ export class CapsulaView {
     this.titulo.value = c.titulo
     this.mensaje.value = c.mensaje
 
-    const fijas = ['feliz', 'nostalgica', 'triste']
+    const fijas = ['feliz', 'nostalgico', 'triste']
     if (fijas.includes(c.emocion)) {
       this.emocion.value = c.emocion
       this.otraEmocion.value = ''
@@ -63,6 +84,7 @@ export class CapsulaView {
     this.fecha.value = c.fecha_apertura
     this.btnGuardar.textContent = 'Actualizar cápsula'
     this.btnCancelar.hidden = false
+    this.form.scrollIntoView({ behavior: 'smooth' })
   }
 
   limpiar(): void {

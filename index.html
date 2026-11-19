@@ -4,43 +4,87 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cápsula del Tiempo</title>
+    <link rel="icon" href="data:," />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Homemade+Apple&family=Dancing+Script:wght@400;700&family=Caveat:wght@400;600&display=swap" rel="stylesheet" />
   </head>
   <body>
     <header>
       <h1>Cápsula del Tiempo</h1>
       <p>Escribe un mensaje para tu yo del futuro. Solo podrás leerlo cuando llegue la fecha.</p>
+      <div class="adorno"><span></span></div>
     </header>
 
     <main>
-      <form id="formulario">
-        <input type="hidden" id="id" />
-        <input type="text" id="titulo" placeholder="Título" required />
-        <textarea id="mensaje" placeholder="Tu mensaje para el futuro..." required></textarea>
-        <select id="emocion" required>
-          <option value="">¿Cómo te sientes?</option>
+      <div class="escritorio">
+        <form id="formulario">
+          <img class="encaje encaje-tl" src="/img/lace-corner-tl.svg" alt="" />
+          <img class="encaje encaje-br" src="/img/lace-corner-br.svg" alt="" />
+          <img class="flores flores-izq" src="/img/babys-breath-left.svg" alt="" />
+          <img class="flores flores-der" src="/img/babys-breath-right.svg" alt="" />
+
+          <div class="membrete">
+            <span>Acta de memoria</span>
+            <em>En secreto hasta su apertura</em>
+          </div>
+
+          <input type="hidden" id="id" />
+          <label for="titulo">Título</label>
+          <input type="text" id="titulo" placeholder="Para mi yo del futuro" spellcheck="false" required />
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" placeholder="Querida yo..." spellcheck="false" required></textarea>
+
+          <div class="fila">
+            <div>
+              <label for="emocion">Emoción</label>
+              <select id="emocion" required>
+                <option value="">¿Cómo te sientes?</option>
+                <option value="feliz">Feliz</option>
+                <option value="nostalgico">Nostálgico</option>
+                <option value="triste">Triste</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+            <input type="text" id="otraEmocion" placeholder="Escribe cómo te sientes" hidden />
+          </div>
+
+          <label for="fecha">Abrir el:</label>
+          <input type="date" id="fecha" required />
+
+          <div class="botones">
+            <button type="button" id="btnCancelar" hidden>Cancelar</button>
+            <button type="submit" id="btnGuardar">Guardar cápsula</button>
+          </div>
+        </form>
+
+        <aside class="mesa">
+          <div class="vela">
+            <div class="llama"></div>
+            <div class="mecha"></div>
+            <div class="cera" id="cera"></div>
+            <div class="plato"></div>
+          </div>
+
+          <button type="button" class="tintero" id="tintero" title="Toca para recargar tinta">
+            <span class="pluma"></span>
+            <span class="frasco"><span class="tinta-frasco" id="tintaFrasco"></span></span>
+          </button>
+
+          <div class="barra"><span id="barraTinta"></span></div>
+          <p class="aviso" id="avisoTinta" hidden>Se acabó la tinta. Toca el tintero para recargar.</p>
+        </aside>
+      </div>
+
+      <div class="filtro">
+        <label for="filtro">Filtrar por emoción:</label>
+        <select id="filtro">
+          <option value="">Todas</option>
           <option value="feliz">Feliz</option>
           <option value="nostalgico">Nostálgico</option>
           <option value="triste">Triste</option>
-          <option value="otro">Otro</option>
+          <option value="otro">Otras</option>
         </select>
-        <input type="text" id="otraEmocion" placeholder="Escribe como tu emoción" hidden />
-        <label>Abrir el: <input type="date" id="fecha" required /></label>
-        <div class="botones">
-          <button type="submit" id="btnGuardar">Guardar cápsula</button>
-          <button type="button" id="btnCancelar" hidden>Cancelar</button>
-        </div>
-      </form>
-
-      <div class="filtro">
-        <label>Filtrar por emoción:
-          <select id="filtro">
-            <option value="">Todas</option>
-            <option value="feliz">Feliz</option>
-            <option value="nostalgico">Nostálgico</option>
-            <option value="triste">Triste</option>
-            <option value="otro">Otras</option>
-          </select>
-        </label>
       </div>
 
       <section id="lista"></section>
